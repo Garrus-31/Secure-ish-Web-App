@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script defer src="valid.js"></script>
+    <script defer src="/valid"></script>
 
 </head>
 
 <body class = "Registration">
     
     <div class="wrapper">
-        <form action="/update" method="POST" onsubmit="return RegistrationValidate()" class="Registration">
+        <form action="/register" method="POST" onsubmit="return RegistrationValidate()" class="Registration">
             <h1>Register</h1>
             <div>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
@@ -30,20 +30,20 @@
                 <i class='bx bxs-phone'></i>
             </div>
             <div class="input-box">
-                <input type="text" oninput="SanitizeInput(event)" value="" id="Username" class="input" placeholder="Enter Username (Email)" required>
+                <input type="text" oninput="SanitizeInput(event)" value="" id="Username" class="input" placeholder="Enter Username (Email)" name="Username" required>
                 <span class="error-message"> </span>
                 <i class='bx bxs-envelope'></i>
             </div>
             <div class="input-box">
-                <input type="Password" oninput="SanitizeInput(event)" id="Password" class="input" placeholder="Enter Password" required>
+                <input type="Password" oninput="SanitizeInput(event)" id="Password" class="input" placeholder="Enter Password" name="Password" required>
                 <span class="error-message"> </span>
                 <i class='bx bxs-lock'></i>
             </div>
 
             <button type="submit" class="btn">Register</button>
              
-            <div class="login-link" onclick="BackToLogin()">
-                <p>Already have an account? <a href="#">Login</a></p>
+            <div class="login-link">
+                <p>Already have an account? <a href="/">Login</a></p>
             </div>
 
             <div><p id = "Length"></p></div>

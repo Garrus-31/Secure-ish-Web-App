@@ -12,7 +12,7 @@ body
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url("8PVZsSp.jpeg") no-repeat;
+    background: url("/background") no-repeat;
     background-size: cover;
     background-position: center;
 }

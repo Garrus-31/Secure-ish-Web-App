@@ -199,20 +199,73 @@
     </main>
     <footer>
     <p class="text-center">
-    <i class="logout" onclick="EndSession()">Log Out</i> </p>
+    <i class="logout" onclick="location.href='/';">Log Out</i> </p>
     <a href = "https://github.com/Garrus-31/Secure-ish-Web-App" target = "_blank">
         <i class="fab fa-github"></i>
     </a>  
     </footer>
 </body>
 <script>
-     window.onload = function() 
+
+let inactivityTimer;
+
+function resetInactivityTimer() 
+{
+    clearTimeout(inactivityTimer);
+
+    inactivityTimer = setTimeout(() => 
+    {
+        alert('You have been logged out due to inactivity.');
+        window.location.href = '/';
+    }, 60000);
+}
+
+document.addEventListener('mousemove', resetInactivityTimer);
+document.addEventListener('keypress', resetInactivityTimer);
+document.addEventListener('click', resetInactivityTimer);
+document.addEventListener('scroll', resetInactivityTimer);
+
+window.addEventListener('beforeunload', async () => 
+{
+    try 
+    {
+        await fetch('/logout', { method: 'POST' });
+    }   
+        catch (error) 
+    {
+        console.error('Error notifying server of logout:', error);
+    }
+});
+
+resetInactivityTimer();
+
+async function checkSession() {
+    try {
+        const response = await fetch('/check-session');
+        const data = await response.json();
+
+        if (!data.loggedIn) 
         {
-            CheckSession();
-            MonitorActivity();
-            StartInactivityTimer();
-        };
-    
+            alert('Your session has expired. You will now be redirected to the login page.');
+            window.location.href = '/';
+        }
+    } catch (error) 
+    {
+        console.error('Error checking session:', error);
+    }
+}
+
+setInterval(checkSession, 300000);
+
+  if (window.history && window.history.pushState) 
+  {
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function () 
+    {
+      window.history.pushState(null, null, window.location.href);
+    };
+  }
+
     let Tasks = []
     const TaskList = document.getElementById ("Tasks")
     const TaskInput = document.getElementById ("TextInput")

@@ -75,28 +75,71 @@ app.post('/register', (req, res) =>
     {
         const { Username, Password } = req.body;
 
-        bcrypt.hash(Password, 10, (err, hashedPassword) => 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(Username)) 
+        {
+            return res.status(400).send('Invalid username format. Please provide a valid email address.');
+        }
+
+    const passwordRegex = /^[A-Za-z][A-Za-z0-9_]{6,15}$/;
+    if (!passwordRegex.test(Password)) 
+        {
+            return res.status(400).send(
+            'Invalid password. Password must be 7-16 characters long, start with a letter, and only contain letters, numbers, or underscores.'
+        );
+        }
+
+    bcrypt.hash(Password, 10, (err, hashedPassword) => {
+        if (err) 
+            {
+                return res.status(500).send('Error Hashing Password');
+            }
+
+        const sql = `INSERT INTO users (username, password) VALUES (?, ?)`;
+        db.run(sql, [Username, hashedPassword], (err) => 
             {
                 if (err) 
                     {
-                        return res.status(500).send('Error Hashing Password');
+                        if (err.code === 'SQLITE_CONSTRAINT') 
+                            {
+                                return res
+                                .status(400)
+                                .send('Username Already Exists. Please Choose Another Username or <a href="/">Login</a>');
+                            }
+                        return res.status(500).send('Error Inserting User.');
                     }
-
-    const sql = `INSERT INTO users (username, password) VALUES (?, ?)`;
-    db.run(sql, [Username, hashedPassword], (err) => 
-        {
-            if (err) 
-                {
-                    if (err.code === 'SQLITE_CONSTRAINT') 
-                        {
-                            return res.status(400).send('Username Already Exists. Please Choose Another Username or <a href="/">Login</a>');
-                        }
-                return res.status(500).send('Error Inserting User.');
-                }
             res.send('User Registered Successfully! <a href="/">Login</a>');
         });
     });
 });
+
+
+// app.post('/register', (req, res) => 
+//     {
+//         const { Username, Password } = req.body;
+
+//         bcrypt.hash(Password, 10, (err, hashedPassword) => 
+//             {
+//                 if (err) 
+//                     {
+//                         return res.status(500).send('Error Hashing Password');
+//                     }
+
+//     const sql = `INSERT INTO users (username, password) VALUES (?, ?)`;
+//     db.run(sql, [Username, hashedPassword], (err) => 
+//         {
+//             if (err) 
+//                 {
+//                     if (err.code === 'SQLITE_CONSTRAINT') 
+//                         {
+//                             return res.status(400).send('Username Already Exists. Please Choose Another Username or <a href="/">Login</a>');
+//                         }
+//                 return res.status(500).send('Error Inserting User.');
+//                 }
+//             res.send('User Registered Successfully! <a href="/">Login</a>');
+//         });
+//     });
+// });
 
 app.get('/check-session', (req, res) => 
     {

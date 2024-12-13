@@ -1,5 +1,19 @@
 # Secure-ish-Web-App
-An implementation of a Secure Web Application built from the ground up using HTML, CSS, JavaScript and NodeJS.
+Overview
+
+This project is an implementation of a Secure Web Application built from the ground up using HTML, CSS, JavaScript and NodeJS. The main purpose of the application itself is to take and save notes for the user. It also provides the functionality to edit and delete the saved notes.
+
+Features
+
+The web application features a registration page which stores user data in a database with the passwords hashed, a login page which checks the database to see if the login parameters match registered entries and the main app itself, which allows users to save, edit and delete notes. 
+
+Security Implementations
+
+Several features have been inplemented to bolster the security of the web application, these include: input validation on both the frontend and backend, session authorization and handling, input sanitization, user authentication, password hashing and secure cookie implementation.
+
+Project Structure
+
+All files are contained within the "public" folder. 
 
 Using this webapp requires installing the following tools:
 1. Node.js

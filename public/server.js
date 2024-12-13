@@ -85,9 +85,7 @@ app.post('/register', (req, res) =>
     const passwordRegex = /^[A-Za-z][A-Za-z0-9_]{6,15}$/;
     if (!passwordRegex.test(Password)) 
         {
-            return res.status(400).send(
-            'Invalid password. Password must be 7-16 characters long, start with a letter, and only contain letters, numbers, or underscores.'
-        );
+            return res.status(400).send('Invalid password. Password must be 7-16 characters long, start with a letter, and only contain letters, numbers, or underscores.');
         }
 
     bcrypt.hash(Password, 10, (err, hashedPassword) => {

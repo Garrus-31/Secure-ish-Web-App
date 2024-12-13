@@ -154,6 +154,22 @@
         color: blueviolet;
     }
 
+    .Admin 
+    {
+        position: fixed;
+        bottom: 10px;    
+        left: 10px;      
+        padding: 10px;  
+        color: inherit;  
+    }
+
+    .Admin p a 
+    {
+        color: #0f172a;
+        text-decoration: none;
+        text-align: left;
+    }
+
     footer
     {
         display: grid;
@@ -203,6 +219,9 @@
     <a href = "https://github.com/Garrus-31/Secure-ish-Web-App" target = "_blank">
         <i class="fab fa-github"></i>
     </a>  
+    <div class="Admin">
+        <p>Are you an admin? <a href="/admin" target=”_blank”>Access admin options</a></p>
+    </div>
     </footer>
 </body>
 <script>
@@ -256,6 +275,21 @@ async function checkSession() {
 }
 
 setInterval(checkSession, 300000);
+
+async function checkIfAdmin() {
+    try {
+        const response = await fetch('/check-session');
+        const data = await response.json();
+
+        if (data.loggedIn && data.isAdmin) {
+            document.getElementById('AdminOptions').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Error checking admin status:', error);
+    }
+}
+
+checkIfAdmin();
 
   if (window.history && window.history.pushState) 
   {

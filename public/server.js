@@ -42,6 +42,19 @@ const requireAuth = (req, res, next) =>
         }
 };
 
+const requireAdmin = (req, res, next) => 
+    {
+        if (req.session.user && req.session.user.isAdmin) 
+            {
+                next();
+            }   
+        else 
+        {
+            res.status(403).send('Forbidden: Admins Only!');
+        }
+};
+
+
 app.get('/', (req, res) => 
     {
         res.sendFile(__dirname + '/LoginForm.html');
@@ -56,6 +69,24 @@ app.get('/index', requireAuth, (req, res) =>
     {
         res.sendFile(__dirname + '/index.html');
     });
+
+app.get('/admin', requireAdmin, (req, res) => 
+    {
+        res.sendFile(__dirname + '/AdminDashboard.html');
+    });
+
+app.get('/users', requireAdmin, (req, res) => 
+    {
+        const sql = `SELECT id, username, isAdmin FROM users`;
+        db.all(sql, [], (err, rows) => 
+            {
+                if (err) 
+                    {
+                        return res.status(500).send('Error Fetching Users');
+                    }
+        res.json(rows);
+    });
+});
 
 app.get('/style', (req, res) => 
     {
@@ -112,6 +143,34 @@ app.post('/register', (req, res) =>
     });
 });
 
+
+// app.post('/register', (req, res) => 
+//     {
+//         const { Username, Password } = req.body;
+
+//         bcrypt.hash(Password, 10, (err, hashedPassword) => 
+//             {
+//                 if (err) 
+//                     {
+//                         return res.status(500).send('Error Hashing Password');
+//                     }
+
+//     const sql = `INSERT INTO users (username, password) VALUES (?, ?)`;
+//     db.run(sql, [Username, hashedPassword], (err) => 
+//         {
+//             if (err) 
+//                 {
+//                     if (err.code === 'SQLITE_CONSTRAINT') 
+//                         {
+//                             return res.status(400).send('Username Already Exists. Please Choose Another Username or <a href="/">Login</a>');
+//                         }
+//                 return res.status(500).send('Error Inserting User.');
+//                 }
+//             res.send('User Registered Successfully! <a href="/">Login</a>');
+//         });
+//     });
+// });
+
 app.get('/check-session', (req, res) => 
     {
         if (req.session && req.session.user) 
@@ -150,6 +209,7 @@ db.get(sql, [Username], (err, row) =>
                 {
                     id: row.id,
                     username: row.username,
+                    isAdmin: row.isAdmin,
                 };
           res.send('Login Successful! <a href="/index">Access Dashboard</a>');
             } 
@@ -180,6 +240,29 @@ app.post('/logout', (req, res) =>
     res.send('You Have Been Logged Out. <a href="/">Log In Again</a>');
   });
 }});
+
+function makeUserAdmin(username) 
+{
+    const sql = `UPDATE users SET isAdmin = TRUE WHERE username = ?`;
+  
+    db.run(sql, [username], function (err) 
+    {
+        if (err) 
+            {
+                console.error('Error updating user:', err.message);
+            } 
+        else if (this.changes === 0) 
+            {
+                console.log('No user found with the given username.');
+            } 
+        else 
+        {
+            console.log(`User ${username} has been granted admin privileges.`);
+        }
+    });
+}
+
+makeUserAdmin('adeunle@gmail.com');
 
 app.listen(port, () => 
     {

@@ -11,7 +11,27 @@ const db = new sqlite3.Database('./users.db', (err) => {
       username TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL
     )`);
+  
+    db.all(`PRAGMA table_info(users)`, (err, columns) => {
+      if (err) {
+        return console.error('Error retrieving table info:', err.message);
+      }
+
+      const columnExists = columns.some(column => column.name === 'isAdmin');
+      
+      if (!columnExists) {
+        db.run('ALTER TABLE users ADD COLUMN isAdmin BOOLEAN DEFAULT FALSE', (err) => {
+          if (err) {
+            return console.error('Error updating table:', err.message);
+          }
+          console.log('isAdmin column added successfully');
+        });
+      } else {
+        console.log('isAdmin column already exists, no changes made.');
+      }
+    });
   }
 });
 
 module.exports = db;
+

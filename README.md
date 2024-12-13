@@ -24,10 +24,14 @@ All files are contained within the "public" folder. There are several files of n
 8. server.js - "NodeJS file which handles server-side functionality"
 9. Background.jpeg - "Background for the login and registration pages"
 
-Using this webapp requires installing the following tools:
-1. Node.js
-2. Express
-3. Body Parser
-4. SQLite
+Installation Instructions
+
+Install [NodeJS]([https://www.google.com](https://nodejs.org/en/download/package-manager))
+Using this webapp requires installing the following tools within the project directory:
+1. Node.js - install in terminal using command 
+2. Express - npm install express
+3. Express Session - npm install express-session
+4. Body Parser - npm install body-parser
+5. SQLite - npm install sqlite3
 
 To start the server, open up a terminal in the root folder and run the command "node server.js". After this, you will be required to register an account and login before being able to use the application.

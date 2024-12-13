@@ -26,7 +26,7 @@ All files are contained within the "public" folder. There are several files of n
 
 Installation Instructions
 
-Install <a href="https://nodejs.org/en/download/package-manager">NodeJS</a
+Install <a href="https://nodejs.org/en/download/package-manager">NodeJS</a>
 Using this webapp requires installing the following tools within the project directory:
 1. Node.js - install in terminal using command 
 2. Express - npm install express

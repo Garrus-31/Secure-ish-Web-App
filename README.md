@@ -14,16 +14,17 @@ Several features have been implemented to bolster the security of the web applic
 **Project Structure**
 
 All files are contained within the "public" folder. There are several files of note, which include:
-1. LoginForm.html - "Handles login functionality"
-2. Registration.html - "Handles registration"
-3. index.html - "Main page which contains the web application and its functionality"
-4. style.css - "Stylesheet for the login and registration pages"
-5. valid.js - "Javascript file used to handle input sanitization in all three .html pages"
-6. DB.js - "Used to initialize the database"
-7. users.db - "Stores the registration and login information"
-8. server.js - "NodeJS file which handles server-side functionality"
-9. Background.jpeg - "Background for the login and registration pages"
-10. package.json & package-lock.json - "Gives detailed information about the project dependencies"
+1. LoginForm.html - "Handles login functionality".
+2. Registration.html - "Handles registration".
+3. index.html - "Main page which contains the web application and its functionality".
+4. AdminDashboard.html - "Page that shows all current users and their privilege level, can only be accessed by admins".
+5. style.css - "Stylesheet for the login and registration pages".
+6. valid.js - "Javascript file used to handle input sanitization in all three .html pages".
+7. DB.js - "Used to initialize the database".
+8. users.db - "Stores the registration and login information".
+9. server.js - "NodeJS file which handles server-side functionality".
+10. Background.jpeg - "Background for the login and registration pages".
+11. package.json & package-lock.json - "Gives detailed information about the project dependencies".
 
 **Installation Instructions**
 

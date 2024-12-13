@@ -113,34 +113,6 @@ app.post('/register', (req, res) =>
     });
 });
 
-
-// app.post('/register', (req, res) => 
-//     {
-//         const { Username, Password } = req.body;
-
-//         bcrypt.hash(Password, 10, (err, hashedPassword) => 
-//             {
-//                 if (err) 
-//                     {
-//                         return res.status(500).send('Error Hashing Password');
-//                     }
-
-//     const sql = `INSERT INTO users (username, password) VALUES (?, ?)`;
-//     db.run(sql, [Username, hashedPassword], (err) => 
-//         {
-//             if (err) 
-//                 {
-//                     if (err.code === 'SQLITE_CONSTRAINT') 
-//                         {
-//                             return res.status(400).send('Username Already Exists. Please Choose Another Username or <a href="/">Login</a>');
-//                         }
-//                 return res.status(500).send('Error Inserting User.');
-//                 }
-//             res.send('User Registered Successfully! <a href="/">Login</a>');
-//         });
-//     });
-// });
-
 app.get('/check-session', (req, res) => 
     {
         if (req.session && req.session.user) 

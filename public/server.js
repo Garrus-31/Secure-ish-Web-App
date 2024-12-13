@@ -69,7 +69,7 @@ app.get('/valid', (req, res) =>
 
 app.get('/background', (req, res) => 
     {
-        res.sendFile(__dirname + '/8PVZsSp.jpeg');
+        res.sendFile(__dirname + '/Background.jpeg');
     });
 
 app.post('/register', (req, res) => 

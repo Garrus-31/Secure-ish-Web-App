@@ -73,9 +73,10 @@ If you try to access the dashboard without being logged in, the system will redi
 3. Password Hashing: Passwords stored in the database were hashed using bcrypt to help protect against 
    password leakage in case of database breaches, ensuring passwords cannot be easily reversed.
 4. Session Control: Session control was used to ensure that the dashboard times out after a brief period of 
-   inactivity. This helpt to prevent session hijacking.
+   inactivity. This helps to prevent session hijacking.
 5. Secure Cookies: The implemented session cookie included the "httpOnly" and "SameSite" tags to help 
    prevent XSS and CSRF attacks.
 6. Cache Control: Disabled caching of sensitive pages to prevent unauthorized access to sensitive data 
    through browser back buttons or cached copies.
+7. Role-Based Access Control: Ensured that only users with the appropriate privileges are given access to the admin dashboard.
 

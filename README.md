@@ -66,17 +66,18 @@ If you try to access the dashboard without being logged in, the system will redi
 
 **Security Implementations**:
 
-1. Input Validation: Input validation was added to the login form, registration form and dashboard to 
+1. User Authentication: To gain access to the application, users must log in with their registered credentials.
+2. Input Validation: Input validation was added to the login form, registration form and dashboard to 
    prevent users from entering malicious data or weak credentials, reducing risks like credential stuffing 
    or brute force attacks.
-2. Parameterized Queries: Used "?" placeholders in SQL queries and bound inputs to prevent SQL injection.
-3. Password Hashing: Passwords stored in the database were hashed using bcrypt to help protect against 
+3. Parameterized Queries: Used "?" placeholders in SQL queries and bound inputs to prevent SQL injection.
+4. Password Hashing: Passwords stored in the database were hashed using bcrypt to help protect against 
    password leakage in case of database breaches, ensuring passwords cannot be easily reversed.
-4. Session Control: Session control was used to ensure that the dashboard times out after a brief period of 
+5. Session Control: Session control was used to ensure that the dashboard times out after a brief period of 
    inactivity. This helps to prevent session hijacking.
-5. Secure Cookies: The implemented session cookie included the "httpOnly" and "SameSite" tags to help 
+6. Secure Cookies: The implemented session cookie included the "httpOnly" and "SameSite" tags to help 
    prevent XSS and CSRF attacks.
-6. Cache Control: Disabled caching of sensitive pages to prevent unauthorized access to sensitive data 
+7. Cache Control: Disabled caching of sensitive pages to prevent unauthorized access to sensitive data 
    through browser back buttons or cached copies.
-7. Role-Based Access Control: Ensured that only users with the appropriate privileges are given access to the admin dashboard.
+8. Role-Based Access Control: Ensured that only users with the appropriate privileges are given access to the admin dashboard.
 

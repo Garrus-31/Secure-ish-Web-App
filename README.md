@@ -7,7 +7,7 @@ This project includes an implementation of a Secure Web Application built from t
 
 The web application features a registration page that stores user data in a database with the passwords hashed, a login page that checks the database to see if the login parameters match registered entries and the main app itself, which allows users to save, edit and delete notes. 
 
-**Security Implementations**
+**Security Objectives**
 
 Several features have been implemented to bolster the security of the web application, these include: input validation on both the frontend and backend, session authorization and handling, input sanitization, user authentication, password hashing, use of parameterized queries and secure cookie implementation.
 
@@ -64,7 +64,7 @@ Dashboard:
 
 If you try to access the dashboard without being logged in, the system will redirect you with an "Unauthorized" error. Sessions also expire automatically after 60 seconds of inactivity. If your session expires, log in again.
 
-**Security Implementations**:
+**Security Implementations**
 
 1. User Authentication: To gain access to the application, users must log in with their registered credentials.
 2. Input Validation: Input validation was added to the login form, registration form and dashboard to 
@@ -82,6 +82,7 @@ If you try to access the dashboard without being logged in, the system will redi
 8. Role-Based Access Control: Ensured that only users with the appropriate privileges are given access to the admin dashboard.
 
 **Testing**
+
 The security testing process evaluated the application's resilience against common threats and ensured compliance with secure coding practices. Both Functional and Static testing were carried out manually for different security features such as Input Validation, Authentication and Session Control. The key findings derived from testing these features are given below:
 1.	Input validation performed as expected and prevented the injection of malicious entities. However, it can be improved by also adding server-side validation.
 2.	Authentication and authorization measures ensured that RBAC was observed. Implementing Rate Limiting would help strengthen security even further.

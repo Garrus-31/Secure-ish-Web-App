@@ -62,7 +62,7 @@ Dashboard:
 4. Click on the "Logout" button toward the end of the webpage to end the session. Doing this redirects you 
    to the login page.
 
-If you try to access the dashboard without being logged in, the system will redirect you with an "Unauthorized" error. Sessions also expire automatically after 30 seconds of inactivity. If your session expires, log in again.
+If you try to access the dashboard without being logged in, the system will redirect you with an "Unauthorized" error. Sessions also expire automatically after 60 seconds of inactivity. If your session expires, log in again.
 
 **Security Implementations**:
 

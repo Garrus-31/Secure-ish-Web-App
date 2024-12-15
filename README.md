@@ -81,3 +81,8 @@ If you try to access the dashboard without being logged in, the system will redi
    through browser back buttons or cached copies.
 8. Role-Based Access Control: Ensured that only users with the appropriate privileges are given access to the admin dashboard.
 
+**Testing**:
+The security testing process evaluated the application's resilience against common threats and ensured compliance with secure coding practices. Both Functional and Static testing were carried out manually for different security features such as Input Validation, Authentication and Session Control. The key findings derived from testing these features are given below:
+1.	Input validation performed as expected and prevented the injection of malicious entities. However, it can be improved by also adding server-side validation.
+2.	Authentication and authorization measures ensured that RBAC was observed. Implementing Rate Limiting would help strengthen security even further.
+
